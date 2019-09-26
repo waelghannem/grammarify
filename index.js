@@ -12,6 +12,7 @@ function Grammarify(){
 
     return {
         clean: function(string){
+            console.log("clean function")
             if (string.length === 0){
                 return "";
             }
