@@ -43,7 +43,7 @@ function Grammarify(){
             }
             // Fix words that should really be
             // one word instead of two
-            //newWords = disconnectedMap.fixSeparated(newWords);
+            newWords = disconnectedMap.fixSeparated(newWords);
 
             // Save where there is existing punctuation
             var endingPunctuation = [];
@@ -70,6 +70,7 @@ function Grammarify(){
             var preSpellcheck = "";
             var preSpellcheckEndingPunct = "";
             for (var i = 0; i < newWords.length; i++){
+                console.log("newWords["+i+" = ",newWords[i])
 
                 // Remove words that are safe to delete if duplicated after each other
                 if (i > 0 && 
@@ -86,13 +87,19 @@ function Grammarify(){
                 preSpellcheck = newWords[i].match(/[\W]+$/g);
 
                 if (preSpellcheck !== null){
+                    console.log("preSpellcheck newWords["+i+" = ",newWords[i])
                     spcheckThisWord = newWords[i].replace(/[\W]+$/g, "");
+                    console.log("preSpellcheck after newWords["+i+" = ",newWords[i])
+
                 } else {
                     spcheckThisWord = newWords[i];
                 }
                 if (spellchecker.isMisspelled(spcheckThisWord)){
+                    console.log("isMisspelled newWords["+i+" = ",newWords[i])
+
                     corrections = spellchecker.getCorrectionsForMisspelling(spcheckThisWord);
-                    
+                    console.log("corrections = ",corrections)
+
                     if (corrections.length > 0){
                         newWords[i] = corrections[0];
                         corrections = [];
