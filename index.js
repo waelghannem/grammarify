@@ -87,26 +87,48 @@ function Grammarify(){
                 preSpellcheck = newWords[i].match(/[\W]+$/g);
 
                 if (preSpellcheck !== null){
-                    console.log("preSpellcheck newWords["+i+" = ",newWords[i])
                     spcheckThisWord = newWords[i].replace(/[\W]+$/g, "");
-                    console.log("preSpellcheck after newWords["+i+" = ",newWords[i])
-
                 } else {
                     spcheckThisWord = newWords[i];
                 }
-                if (spellchecker.isMisspelled(spcheckThisWord)){
-                    console.log("isMisspelled newWords["+i+" = ",newWords[i])
+                if (spcheckThisWord.indexOf(" ") >= -1) {
+                    subNewWords = spellchecker.split(" ");
+                    for (var j = 0; j < subNewWords.length; j++){
+                        if (spellchecker.isMisspelled(subNewWords[j])){
+                            console.log("isMisspelled newWords["+j+" = ",subNewWords[j])
+        
+                            corrections = spellchecker.getCorrectionsForMisspelling(subNewWords[j]);
+                            console.log("corrections = ",corrections)
+        
+                            if (corrections.length > 0){
+                                subNewWords[j] = corrections[0];
+                                corrections = [];
+        
+                                // Add ending punctuation back in
+                                if (preSpellcheck !== null){
+                                    subNewWords[j] = subNewWords[j] + preSpellcheck[0];
+                                }
+                            }
+                        }
+                    }
+                 subNewWords.join("");
+                 newWords[i] = subNewWords;
 
-                    corrections = spellchecker.getCorrectionsForMisspelling(spcheckThisWord);
-                    console.log("corrections = ",corrections)
-
-                    if (corrections.length > 0){
-                        newWords[i] = corrections[0];
-                        corrections = [];
-
-                        // Add ending punctuation back in
-                        if (preSpellcheck !== null){
-                            newWords[i] = newWords[i] + preSpellcheck[0];
+                } else {
+                    if (spellchecker.isMisspelled(spcheckThisWord)){
+                        console.log("isMisspelled newWords["+i+" = ",newWords[i])
+    
+                        corrections = spellchecker.getCorrectionsForMisspelling(spcheckThisWord);
+                        console.log("corrections = ",corrections)
+    
+                        if (corrections.length > 0){
+                            newWords[i] = corrections[0];
+                            corrections = [];
+    
+                            // Add ending punctuation back in
+                            if (preSpellcheck !== null){
+                                newWords[i] = newWords[i] + preSpellcheck[0];
+                            }
                         }
                     }
                 }
