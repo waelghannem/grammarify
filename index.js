@@ -36,8 +36,6 @@ function Grammarify(){
 
             // Replace shorthand/improper grammar
             // the spellchecker might miss
-            console.log("validationRules.shorthandToFullWords.value =",validationRules.shorthandToFullWords.value)
-            console.log("validationRules.shorthandToFullWords.shorthandList =",validationRules.shorthandToFullWords.shorthandList)
             if (validationRules.shorthandToFullWords.value === true ) {
                 newWords = smsMap.fixShorthand(newWords, validationRules.shorthandToFullWords.shorthandList );
             }
@@ -70,8 +68,6 @@ function Grammarify(){
             var preSpellcheck = "";
             var preSpellcheckEndingPunct = "";
             for (var i = 0; i < newWords.length; i++){
-                console.log("newWords["+i+" = ",newWords[i])
-
                 // Remove words that are safe to delete if duplicated after each other
                 if (i > 0 && 
                     newWords[i] === newWords[i-1].trim().toLowerCase() &&
@@ -87,19 +83,14 @@ function Grammarify(){
                 preSpellcheck = newWords[i].match(/[\W]+$/g);
 
                 if (preSpellcheck !== null){
-                    console.log("preSpellcheck newWords["+i+" = ",newWords[i])
                     spcheckThisWord = newWords[i].replace(/[\W]+$/g, "");
-                    console.log("preSpellcheck after newWords["+i+" = ",newWords[i])
 
                 } else {
                     spcheckThisWord = newWords[i];
                 }
                 if (spcheckThisWord.indexOf(" ") == -1) {
-                    if (spellchecker.isMisspelled(spcheckThisWord)){
-                        console.log("isMisspelled newWords["+i+" = ",newWords[i])
-    
+                    if (spellchecker.isMisspelled(spcheckThisWord)){    
                         corrections = spellchecker.getCorrectionsForMisspelling(spcheckThisWord);
-                        console.log("corrections = ",corrections)
     
                         if (corrections.length > 0){
                             newWords[i] = corrections[0];
