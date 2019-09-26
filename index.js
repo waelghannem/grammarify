@@ -60,7 +60,7 @@ function Grammarify(){
             
             // Clean the sentence;
             // main logic loop
-            var duplicates = ["the", "a", "an", "and", "but", "or", "nor", "for", "so", "yet"];
+            var duplicates = validationRules.duplicatedWords;
             var corrections = [];
             var endingPunctuationIndex = false;
             var lastCharacter = "";
