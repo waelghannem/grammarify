@@ -11,7 +11,7 @@ function Grammarify(){
     var numberMap = new Grammarify_Numbers();
 
     return {
-        clean: function(string){
+        clean: function(string,validationRules){
             console.log("clean function")
             if (string.length === 0){
                 return "";
@@ -37,7 +37,7 @@ function Grammarify(){
 
             // Replace shorthand/improper grammar
             // the spellchecker might miss
-            newWords = smsMap.fixShorthand(newWords);
+            //newWords = smsMap.fixShorthand(newWords);
 
             // Fix words that should really be
             // one word instead of two
