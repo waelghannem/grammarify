@@ -36,7 +36,7 @@ function Grammarify(){
 
             // Replace shorthand/improper grammar
             // the spellchecker might miss
-            if (validationRules.shorthandToFullWords.value === true ) {
+            if (validationRules.shorthandToFullWords && validationRules.shorthandToFullWords.value === true ) {
                 newWords = smsMap.fixShorthand(newWords, validationRules.shorthandToFullWords.shorthandList );
             }
             // Fix words that should really be
