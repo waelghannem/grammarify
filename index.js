@@ -36,8 +36,6 @@ function Grammarify(){
 
             // Replace shorthand/improper grammar
             // the spellchecker might miss
-            console.log("validationRules.shorthandToFullWords.value =",validationRules.shorthandToFullWords.value)
-            console.log("validationRules.shorthandToFullWords.shorthandList =",validationRules.shorthandToFullWords.shorthandList)
             if (validationRules.shorthandToFullWords.value === true ) {
                 newWords = smsMap.fixShorthand(newWords, validationRules.shorthandToFullWords.shorthandList );
             }
@@ -108,7 +106,9 @@ function Grammarify(){
                         }
                     }
                  subNewWords.join(" ");
+                 console.log("subNewWords = ", subNewWords);
                  newWords[i] = subNewWords;
+                 console.log("newWords = ", newWords);
 
                 } else {
                     if (spellchecker.isMisspelled(spcheckThisWord)){   
