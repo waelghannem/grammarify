@@ -43,7 +43,7 @@ function Grammarify(){
             }
             // Fix words that should really be
             // one word instead of two
-            newWords = disconnectedMap.fixSeparated(newWords);
+            //newWords = disconnectedMap.fixSeparated(newWords);
 
             // Save where there is existing punctuation
             var endingPunctuation = [];
