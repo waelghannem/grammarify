@@ -12,7 +12,6 @@ function Grammarify(){
 
     return {
         clean: function(string,validationRules){
-            console.log("clean function")
             if (string.length === 0){
                 return "";
             }
@@ -37,8 +36,9 @@ function Grammarify(){
 
             // Replace shorthand/improper grammar
             // the spellchecker might miss
-            //newWords = smsMap.fixShorthand(newWords);
-
+            if (validationRules.shorthandToFullWords.value == true ) {
+                newWords = smsMap.fixShorthand(newWords, validationRules.shorthandToFullWords.shorthandList );
+            }
             // Fix words that should really be
             // one word instead of two
             newWords = disconnectedMap.fixSeparated(newWords);
@@ -446,7 +446,7 @@ function Grammarify_SMS(){
 
             return container;
         },
-        fixShorthand: function(input){
+        fixShorthand: function(input, shorthandList){
             var punctuation = "";
             var container = [];
             var stripped = "";
@@ -468,7 +468,7 @@ function Grammarify_SMS(){
                 if (typeof stripped[2] !== ""){
                     punctuation = stripped[2];
                 }
-                
+                map = shorthandList;
                 stripped = stripped[1]; // Sets stripped to input that was passed into the .match call
                 if (typeof map[stripped] !== "undefined"){
                     container[i] = map[stripped];
