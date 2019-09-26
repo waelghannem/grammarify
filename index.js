@@ -126,12 +126,12 @@ function Grammarify(){
                 }
 
                 // Capitalize words if necessary
-                if (i > 0){
+                /*if (i > 0){
                     endingPunctuationIndex = endingPunctuation[i-1] !== "";
                 }                
                 if (i === 0 || endingPunctuationIndex){
                     newWords[i] = newWords[i][0].toUpperCase() + newWords[i].substr(1);
-                }
+                }*/
 
                 // Add leading space to word
                 if (i !== 0){
