@@ -70,8 +70,6 @@ function Grammarify(){
             var preSpellcheck = "";
             var preSpellcheckEndingPunct = "";
             for (var i = 0; i < newWords.length; i++){
-                console.log("newWords["+i+" = ",newWords[i])
-
                 // Remove words that are safe to delete if duplicated after each other
                 if (i > 0 && 
                     newWords[i] === newWords[i-1].trim().toLowerCase() &&
@@ -92,14 +90,12 @@ function Grammarify(){
                     spcheckThisWord = newWords[i];
                 }
                 if (spcheckThisWord.indexOf(" ") >= -1) {
-                    subNewWords = spellchecker.split(" ");
+                    subNewWords = spcheckThisWord.split(" ");
                     for (var j = 0; j < subNewWords.length; j++){
                         if (spellchecker.isMisspelled(subNewWords[j])){
                             console.log("isMisspelled newWords["+j+" = ",subNewWords[j])
-        
                             corrections = spellchecker.getCorrectionsForMisspelling(subNewWords[j]);
                             console.log("corrections = ",corrections)
-        
                             if (corrections.length > 0){
                                 subNewWords[j] = corrections[0];
                                 corrections = [];
@@ -111,16 +107,12 @@ function Grammarify(){
                             }
                         }
                     }
-                 subNewWords.join("");
+                 subNewWords.join(" ");
                  newWords[i] = subNewWords;
 
                 } else {
-                    if (spellchecker.isMisspelled(spcheckThisWord)){
-                        console.log("isMisspelled newWords["+i+" = ",newWords[i])
-    
-                        corrections = spellchecker.getCorrectionsForMisspelling(spcheckThisWord);
-                        console.log("corrections = ",corrections)
-    
+                    if (spellchecker.isMisspelled(spcheckThisWord)){   
+                        corrections = spellchecker.getCorrectionsForMisspelling(spcheckThisWord);   
                         if (corrections.length > 0){
                             newWords[i] = corrections[0];
                             corrections = [];
